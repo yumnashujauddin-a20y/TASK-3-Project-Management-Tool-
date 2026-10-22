@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { io } from "socket.io-client";
+import { useCallback, useEffect, useRef, useState } from "react"; import { io } from "socket.io-client";
 
-const API = "http://localhost:5000/api";
-const SOCKET = "http://localhost:5000";
+const API = ( import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:5000/api" : "https://task-3-project-management-tool.onrender.com/api") ).replace(//+$/, "");
+
+const SOCKET = API.replace(//api$/, "");
+
 
 async function request(path, token, options = {}) {
   const res = await fetch(`${API}${path}`, {
